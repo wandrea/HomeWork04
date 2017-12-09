@@ -45,7 +45,7 @@ public class UserRegistry {
                     addNewUser();
                     break;
                 case 3:
-
+                    modifyUser();
                     break;
                 case 4:
                     deleteUser();
@@ -58,8 +58,6 @@ public class UserRegistry {
             }
         }
     }
-
-
 
 
     public void printAllUser() {
@@ -79,6 +77,7 @@ public class UserRegistry {
     public void addNewUser() {
         boolean hadPlace = false;
         int max = 0;
+        System.out.println("Új felhasználó létrehozása!");
         for (int i = 0; i < userArray.length; i++) {
             User userToCheck = userArray[i];
             if (userToCheck != null && userToCheck.getId() > max) {
@@ -123,7 +122,7 @@ public class UserRegistry {
 
     }
 
-    public void deleteUser(){
+    public void deleteUser() {
         //Bekértem az id-t, a tömb elemein végigmenve megnéztem hogy van-e ilyen id-vel rendelkezõ user
         //illetve hogy az adott index-en van e user adatokkal.
         //ha van user és egyezik az id akkor törli azt az indexût a tömbbõl.
@@ -132,17 +131,54 @@ public class UserRegistry {
         System.out.println("Kérem adja meg a törölni kívánt felhasználó azonosítóját: ");
         int inputId = scan.nextInt();
         boolean wasMatch = false;
-        for (int i = 0; i <userArray.length; i++) {
-            if( userArray[i]!=null && userArray[i].getId()==inputId ){
+        for (int i = 0; i < userArray.length; i++) {
+            if (userArray[i] != null && userArray[i].getId() == inputId) {
                 wasMatch = true;
-                userArray[i]=null;
+                userArray[i] = null;
             }
 
         }
-        if(!wasMatch){
+        if (!wasMatch) {
             System.out.println("Nincs ilyen azonosítójú felhasználó!");
         }
     }
+
+    public void modifyUser() {
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Kérem adja meg a törölni kívánt felhasználó azonosítóját: ");
+        int inputId = scan.nextInt();
+        boolean wasMatch = false;
+        //végigmegyek a tömbön és megnézem van egyezés a bekér id és a user-ek idja között és ellenõrzöm hogy van-e
+        //objektum azon az indexen ahol éppen van.
+        for (int i = 0; i < userArray.length; i++) {
+            if (userArray[i]!=null && inputId == userArray[i].getId()) {
+                wasMatch = true;
+                break;
+            }
+        }
+
+        if (wasMatch == false) {
+            System.out.println("Nem találtam ilyen id-jû felhasználót!");
+        } else {
+            System.out.println("Kérem adja meg a vezeték nevét: ");
+            String inputFirstName = scan.next();
+            System.out.println("Kérem adja meg a kereszt nevét: ");
+            String inputLastName = scan.next();
+            //ismét végigmegyek a tömbön és az id egyezésnél beállítom a neveket és generálok egy új jelszót.
+            for (int i = 0; i < userArray.length; i++) {
+                if (userArray[i]!=null && inputId == userArray[i].getId()) {
+                    userArray[i].setFirstName(inputFirstName);
+                    userArray[i].setLastName(inputLastName);
+                    userArray[i].setPassword(PasswordGenerator.generatePassword(10));
+                }
+            }
+        }
+
+    }
+
+
+
+
 }
 
 
