@@ -1,5 +1,7 @@
 package hu.helixlab;
 
+
+
 public class Main {
 
     public static void main(String[] args) {
@@ -7,5 +9,8 @@ public class Main {
         ur.printMenu();
         ur.run();
         System.out.println(ur.countUser());
+        ArrayTest at = new ArrayTest();
+        at.initArray();
+        System.out.println(at.getSecondHighest());
     }
 }
