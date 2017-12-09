@@ -11,10 +11,21 @@ import java.util.Random;
 public class UserRegistry {
     User[] userArray;
 
+    public void printMenu() {
+        System.out.println("*********Menu*********");
+        System.out.println("****Print menu (0)****");
+        System.out.println("**Print all User (1)**");
+        System.out.println("***Add new User (2)***");
+        System.out.println("****Modify User (3)***");
+        System.out.println("****Delete User (4)***");
+        System.out.println("*******Exit (5)*******");
+    }
+
     public UserRegistry() {
         userArray = new User[10];
         init();
     }
+
 
     public void run() {
         Scanner scan = new Scanner(System.in);
@@ -37,7 +48,7 @@ public class UserRegistry {
 
                     break;
                 case 4:
-
+                    deleteUser();
                     break;
                 case 5:
                     System.out.println("Exit....");
@@ -49,15 +60,7 @@ public class UserRegistry {
     }
 
 
-    public void printMenu() {
-        System.out.println("*********Menu*********");
-        System.out.println("****Print menu (0)****");
-        System.out.println("**Print all User (1)**");
-        System.out.println("***Add new User (2)***");
-        System.out.println("****Modify User (3)***");
-        System.out.println("****Delete User (4)***");
-        System.out.println("*******Exit (5)*******");
-    }
+
 
     public void printAllUser() {
         for (int i = 0; i < userArray.length; i++) {
@@ -118,6 +121,27 @@ public class UserRegistry {
             userArray[i] = initUser;
         }
 
+    }
+
+    public void deleteUser(){
+        //Bekértem az id-t, a tömb elemein végigmenve megnéztem hogy van-e ilyen id-vel rendelkezõ user
+        //illetve hogy az adott index-en van e user adatokkal.
+        //ha van user és egyezik az id akkor törli azt az indexût a tömbbõl.
+        //boolean-nal vizsgáltam, hogy egyáltalán van e ilyen azonosítójú, ha nincs akkor kiírja.
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Kérem adja meg a törölni kívánt felhasználó azonosítóját: ");
+        int inputId = scan.nextInt();
+        boolean wasMatch = false;
+        for (int i = 0; i <userArray.length; i++) {
+            if( userArray[i]!=null && userArray[i].getId()==inputId ){
+                wasMatch = true;
+                userArray[i]=null;
+            }
+
+        }
+        if(!wasMatch){
+            System.out.println("Nincs ilyen azonosítójú felhasználó!");
+        }
     }
 }
 

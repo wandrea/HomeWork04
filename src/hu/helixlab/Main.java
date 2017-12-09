@@ -3,6 +3,8 @@ package hu.helixlab;
 public class Main {
 
     public static void main(String[] args) {
-	// write your code here
+	UserRegistry ur = new UserRegistry();
+        ur.printMenu();
+        ur.run();
     }
 }
