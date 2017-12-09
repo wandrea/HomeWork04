@@ -151,7 +151,7 @@ public class UserRegistry {
         //végigmegyek a tömbön és megnézem van egyezés a bekér id és a user-ek idja között és ellenõrzöm hogy van-e
         //objektum azon az indexen ahol éppen van.
         for (int i = 0; i < userArray.length; i++) {
-            if (userArray[i]!=null && inputId == userArray[i].getId()) {
+            if (userArray[i] != null && inputId == userArray[i].getId()) {
                 wasMatch = true;
                 break;
             }
@@ -166,7 +166,7 @@ public class UserRegistry {
             String inputLastName = scan.next();
             //ismét végigmegyek a tömbön és az id egyezésnél beállítom a neveket és generálok egy új jelszót.
             for (int i = 0; i < userArray.length; i++) {
-                if (userArray[i]!=null && inputId == userArray[i].getId()) {
+                if (userArray[i] != null && inputId == userArray[i].getId()) {
                     userArray[i].setFirstName(inputFirstName);
                     userArray[i].setLastName(inputLastName);
                     userArray[i].setPassword(PasswordGenerator.generatePassword(10));
@@ -176,7 +176,16 @@ public class UserRegistry {
 
     }
 
-
+    public int countUser() {
+        int count = 0;
+        //végigmegyek a tömbön és ha nem null az adott indexen akkor adjon hozzá egyet a count-hoz
+        for (int i = 0; i < userArray.length; i++) {
+            if (userArray[i] != null) {
+                ++count;
+            }
+        }
+        return count;
+    }
 
 
 }

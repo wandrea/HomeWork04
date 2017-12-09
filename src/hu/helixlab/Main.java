@@ -6,5 +6,6 @@ public class Main {
 	UserRegistry ur = new UserRegistry();
         ur.printMenu();
         ur.run();
+        System.out.println(ur.countUser());
     }
 }
